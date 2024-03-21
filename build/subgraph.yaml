@@ -1,0 +1,67 @@
+specVersion: 1.0.0
+schema:
+  file: schema.graphql
+templates:
+  - name: Plantoid
+    kind: ethereum/contract
+    network: sepolia
+    source:
+      abi: Plantoid
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: PlantoidSpawn/PlantoidSpawn.wasm
+      entities:
+        - Seed
+        - Holder
+        - Proposal
+        - Vote
+        - Round
+      abis:
+        - name: Plantoid
+          file: Plantoid/abis/mainnet_Plantoid.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleSeedTransfer
+        - event: ProposalSubmitted(address,string,uint256,uint256)
+          handler: handleProposalSubmitted
+        - event: Voted(address,uint256,uint256,uint256)
+          handler: handleVoted
+        - event: ProposalVetoed(uint256,uint256)
+          handler: handleVetoed
+        - event: ProposalStarted(uint256,uint256)
+          handler: handleProposalStarted
+        - event: VotingStarted(uint256,uint256)
+          handler: handleVotingStarted
+        - event: GraceStarted(uint256,uint256)
+          handler: handleGraceStarted
+        - event: ProposalAccepted(uint256,uint256)
+          handler: handleProposalAccepted
+        - event: RoundInvalidated(uint256)
+          handler: handleRoundInvalidated
+        - event: NewPlantoid(address)
+          handler: handlePlantoidInitialized
+        - event: Revealed(uint256,string)
+          handler: handleReveal
+dataSources:
+  - kind: ethereum/contract
+    name: PlantoidSpawn
+    network: sepolia
+    source:
+      address: "0xA8e715aA553a63F13A598B4bB7cAcFF9eC56A155"
+      abi: PlantoidSpawn
+      startBlock: 5521728
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: PlantoidSpawn/PlantoidSpawn.wasm
+      entities:
+        - Spawner
+      abis:
+        - name: PlantoidSpawn
+          file: PlantoidSpawn/abis/mainnet_PlantoidSpawn.json
+      eventHandlers:
+        - event: PlantoidSpawned(indexed address)
+          handler: handleNewPlantoid
