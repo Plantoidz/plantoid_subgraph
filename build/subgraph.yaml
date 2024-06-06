@@ -49,9 +49,9 @@ dataSources:
     name: PlantoidSpawn
     network: sepolia
     source:
-      address: "0xA8e715aA553a63F13A598B4bB7cAcFF9eC56A155"
+      address: "0x3623E0f2394D51B5Ee67638Ce05933D6D441eE62"
       abi: PlantoidSpawn
-      startBlock: 5521728
+      startBlock: 6047600
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

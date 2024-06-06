@@ -94,6 +94,7 @@ export function handleSeedTransfer(event: Transfer): void {
             seed.revealed = false
             seed.uri = ''
             seed.plantoid = plantoidAddress
+            seed.transactionHash = event.transaction.hash.toHexString(); 
             // let metadataURI = contract.try_tokenURI(id)
             // if (!metadataURI.reverted) {
             //     seed.uri = normalize(metadataURI.value)
